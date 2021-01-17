@@ -17,18 +17,13 @@ from django import urls
 from django.contrib import admin
 from django.urls import path, include
 
-from rest_framework import routers
+from phonebook import views
 
-from phonebook import views, apiviews
-
-router = routers.DefaultRouter()
-router.register(r'persones', apiviews.PersoneViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('add/', views.AddPhoneFormView.as_view(), name="add"),
     path('delete/<int:pk>', views.DeletePhoneView.as_view(), name="delete"),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/', include(router.urls)),
     path('', views.HomePageView.as_view(), name="home")
 ]
